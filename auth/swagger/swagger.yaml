@@ -1,0 +1,3482 @@
+consumes:
+- application/json
+- application/xml
+- application/gob
+- application/x-gob
+definitions:
+  All-Sessions:
+    description: All of the sessions associated with a user (default view)
+    example:
+      currentSession:
+        browser: Vero in.
+        coordinates: 513452x54123
+        id: Quibusdam molestias inventore labore et et.
+        ip: Qui eaque in corporis facilis.
+        isMobile: false
+        lastUsed: "2003-05-04T15:53:56Z"
+        location: Possimus reiciendis aliquid ex minus minima.
+        mapUrl: Atque pariatur voluptatem sit culpa perspiciatis.
+        os: Laboriosam et nisi et quo.
+        userId: Saepe tenetur occaecati quo in fuga.
+      otherSessions:
+      - browser: Vero in.
+        coordinates: 513452x54123
+        id: Quibusdam molestias inventore labore et et.
+        ip: Qui eaque in corporis facilis.
+        isMobile: false
+        lastUsed: "2003-05-04T15:53:56Z"
+        location: Possimus reiciendis aliquid ex minus minima.
+        mapUrl: Atque pariatur voluptatem sit culpa perspiciatis.
+        os: Laboriosam et nisi et quo.
+        userId: Saepe tenetur occaecati quo in fuga.
+      - browser: Vero in.
+        coordinates: 513452x54123
+        id: Quibusdam molestias inventore labore et et.
+        ip: Qui eaque in corporis facilis.
+        isMobile: false
+        lastUsed: "2003-05-04T15:53:56Z"
+        location: Possimus reiciendis aliquid ex minus minima.
+        mapUrl: Atque pariatur voluptatem sit culpa perspiciatis.
+        os: Laboriosam et nisi et quo.
+        userId: Saepe tenetur occaecati quo in fuga.
+      - browser: Vero in.
+        coordinates: 513452x54123
+        id: Quibusdam molestias inventore labore et et.
+        ip: Qui eaque in corporis facilis.
+        isMobile: false
+        lastUsed: "2003-05-04T15:53:56Z"
+        location: Possimus reiciendis aliquid ex minus minima.
+        mapUrl: Atque pariatur voluptatem sit culpa perspiciatis.
+        os: Laboriosam et nisi et quo.
+        userId: Saepe tenetur occaecati quo in fuga.
+    properties:
+      currentSession:
+        $ref: '#/definitions/Session'
+      otherSessions:
+        $ref: '#/definitions/SessionCollection'
+    title: 'Mediatype identifier: all-sessions; view=default'
+    type: object
+  Auth-Status:
+    description: If other Oauths or Auths exists on account. (default view)
+    example:
+      facebook: false
+      google: true
+      linkedin: false
+      microsoft: true
+      standard: false
+      twitter: false
+    properties:
+      facebook:
+        description: True if user has facebook Oauth signin
+        example: false
+        type: boolean
+      google:
+        description: True if user has google Oauth signin
+        example: true
+        type: boolean
+      linkedin:
+        description: True if user has linkedin Oauth signin
+        example: false
+        type: boolean
+      microsoft:
+        description: True if user has microsoft Oauth signin
+        example: true
+        type: boolean
+      standard:
+        description: True if user has password signin
+        example: false
+        type: boolean
+      twitter:
+        description: True if user has twitter Oauth signin
+        example: false
+        type: boolean
+    required:
+    - google
+    - facebook
+    - twitter
+    - linkedin
+    - microsoft
+    - standard
+    title: 'Mediatype identifier: auth-status; view=default'
+    type: object
+  Bookmark:
+    description: an individual bookmark (default view)
+    example:
+      category: Quo quo amet occaecati ut.
+      description: Et deleniti quis et consequuntur officiis.
+      id: Quaerat nam velit incidunt sunt sed.
+      title: Fugit corrupti dignissimos nisi voluptatum.
+      type: Mollitia sint.
+    properties:
+      category:
+        description: category of the post or video
+        example: Quo quo amet occaecati ut.
+        type: string
+      description:
+        description: description of the post or video
+        example: Et deleniti quis et consequuntur officiis.
+        type: string
+      id:
+        description: ID of the post or video as per database
+        example: Quaerat nam velit incidunt sunt sed.
+        type: string
+      title:
+        description: title of post or video
+        example: Fugit corrupti dignissimos nisi voluptatum.
+        type: string
+      type:
+        description: whether this bookmark is a video or a post
+        example: Mollitia sint.
+        type: string
+    required:
+    - id
+    - type
+    - title
+    - category
+    - description
+    title: 'Mediatype identifier: bookmark; view=default'
+    type: object
+  Newsletter-Subscriber:
+    description: An individual newsletter subscriber (default view)
+    example:
+      email: kurt@gaylordjast.biz
+      isActive: true
+      subscribedAt: "2015-08-21T22:05:33Z"
+    properties:
+      email:
+        example: kurt@gaylordjast.biz
+        format: email
+        type: string
+      isActive:
+        example: true
+        type: boolean
+      subscribedAt:
+        example: "2015-08-21T22:05:33Z"
+        format: date-time
+        type: string
+    required:
+    - email
+    - subscribedAt
+    - isActive
+    title: 'Mediatype identifier: newsletter-subscriber; view=default'
+    type: object
+  Newsletter-SubscriberCollection:
+    description: Newsletter-SubscriberCollection is the media type for an array of
+      Newsletter-Subscriber (default view)
+    example:
+    - email: kurt@gaylordjast.biz
+      isActive: true
+      subscribedAt: "2015-08-21T22:05:33Z"
+    items:
+      $ref: '#/definitions/Newsletter-Subscriber'
+    title: 'Mediatype identifier: newsletter-subscriber; type=collection; view=default'
+    type: array
+  RedeemTokenSessionPayload:
+    example:
+      token: 4de823c1-efba-4c7c-8535-e1016ce90646
+    properties:
+      token:
+        description: The token to redeem
+        example: 4de823c1-efba-4c7c-8535-e1016ce90646
+        format: uuid
+        type: string
+    required:
+    - token
+    title: RedeemTokenSessionPayload
+    type: object
+  Session:
+    description: A session for a user, associated with a specific browser (default
+      view)
+    example:
+      browser: Vero in.
+      coordinates: 513452x54123
+      id: Quibusdam molestias inventore labore et et.
+      ip: Qui eaque in corporis facilis.
+      isMobile: false
+      lastUsed: "2003-05-04T15:53:56Z"
+      location: Possimus reiciendis aliquid ex minus minima.
+      mapUrl: Atque pariatur voluptatem sit culpa perspiciatis.
+      os: Laboriosam et nisi et quo.
+      userId: Saepe tenetur occaecati quo in fuga.
+    properties:
+      browser:
+        description: The browser and browser version connected with this session
+        example: Vero in.
+        type: string
+      coordinates:
+        description: The latitude and longitude of the last known location of the
+          session
+        example: 513452x54123
+        type: string
+      id:
+        description: Unique unchanging session ID
+        example: Quibusdam molestias inventore labore et et.
+        type: string
+      ip:
+        description: The last IP address where this session was used
+        example: Qui eaque in corporis facilis.
+        type: string
+      isMobile:
+        description: Whether the session was from a mobile device
+        example: false
+        type: boolean
+      lastUsed:
+        description: Time that this session was last used
+        example: "2003-05-04T15:53:56Z"
+        format: date-time
+        type: string
+      location:
+        description: A humanReadable string describing the last known location of
+          the session
+        example: Possimus reiciendis aliquid ex minus minima.
+        type: string
+      mapUrl:
+        description: The URL of the Google map to show the location, suitable for
+          using in an img tag
+        example: Atque pariatur voluptatem sit culpa perspiciatis.
+        type: string
+      os:
+        description: The OS of the system where this session was used
+        example: Laboriosam et nisi et quo.
+        type: string
+      userId:
+        description: ID of the user this session is for
+        example: Saepe tenetur occaecati quo in fuga.
+        type: string
+    required:
+    - id
+    - userId
+    - lastUsed
+    - browser
+    - os
+    - ip
+    - location
+    - coordinates
+    - isMobile
+    - mapUrl
+    title: 'Mediatype identifier: session; view=default'
+    type: object
+  SessionCollection:
+    description: SessionCollection is the media type for an array of Session (default
+      view)
+    example:
+    - browser: Vero in.
+      coordinates: 513452x54123
+      id: Quibusdam molestias inventore labore et et.
+      ip: Qui eaque in corporis facilis.
+      isMobile: false
+      lastUsed: "2003-05-04T15:53:56Z"
+      location: Possimus reiciendis aliquid ex minus minima.
+      mapUrl: Atque pariatur voluptatem sit culpa perspiciatis.
+      os: Laboriosam et nisi et quo.
+      userId: Saepe tenetur occaecati quo in fuga.
+    items:
+      $ref: '#/definitions/Session'
+    title: 'Mediatype identifier: session; type=collection; view=default'
+    type: array
+  User:
+    description: A user in the system (default view)
+    example:
+      category:
+      - Necessitatibus tenetur.
+      - Necessitatibus tenetur.
+      - Necessitatibus tenetur.
+      firstName: Jeff
+      id: Dolorum ut et.
+      isEventAuthor: false
+      isPluginAuthor: false
+      lastName: Newmann
+      plugins:
+      - dateAdded: "1980-07-18T03:31:56Z"
+        permissionsAllowed:
+        - Nulla tempore similique ipsam qui consequatur eaque.
+        - Nulla tempore similique ipsam qui consequatur eaque.
+        pluginID: Sequi dolore minus totam aut.
+      - dateAdded: "1980-07-18T03:31:56Z"
+        permissionsAllowed:
+        - Nulla tempore similique ipsam qui consequatur eaque.
+        - Nulla tempore similique ipsam qui consequatur eaque.
+        pluginID: Sequi dolore minus totam aut.
+      profileImage: Veritatis voluptatem et sunt fuga.
+    properties:
+      category:
+        description: Category/Categories that a user might select (User interests)
+        example:
+        - Necessitatibus tenetur.
+        - Necessitatibus tenetur.
+        - Necessitatibus tenetur.
+        items:
+          example: Necessitatibus tenetur.
+          type: string
+        type: array
+      firstName:
+        description: Given name for the user
+        example: Jeff
+        type: string
+      id:
+        description: Unique unchanging user ID
+        example: Dolorum ut et.
+        type: string
+      isEventAuthor:
+        description: Whether the user is a event author on the site
+        example: false
+        type: boolean
+      isPluginAuthor:
+        description: Whether the user is a plugin author on the site
+        example: false
+        type: boolean
+      lastName:
+        description: Family name for the user
+        example: Newmann
+        type: string
+      plugins:
+        description: IDs of all plugins that the user has installed
+        example:
+        - dateAdded: "1980-07-18T03:31:56Z"
+          permissionsAllowed:
+          - Nulla tempore similique ipsam qui consequatur eaque.
+          - Nulla tempore similique ipsam qui consequatur eaque.
+          pluginID: Sequi dolore minus totam aut.
+        - dateAdded: "1980-07-18T03:31:56Z"
+          permissionsAllowed:
+          - Nulla tempore similique ipsam qui consequatur eaque.
+          - Nulla tempore similique ipsam qui consequatur eaque.
+          pluginID: Sequi dolore minus totam aut.
+        items:
+          $ref: '#/definitions/User-Plugin-Media'
+        type: array
+      profileImage:
+        example: Veritatis voluptatem et sunt fuga.
+        type: string
+    required:
+    - id
+    - isPluginAuthor
+    - firstName
+    - lastName
+    - profileImage
+    title: 'Mediatype identifier: user; view=default'
+    type: object
+  User-Plugin-Media:
+    description: Details about all the plugins that user has installed (default view)
+    example:
+      dateAdded: "1980-07-18T03:31:56Z"
+      permissionsAllowed:
+      - Nulla tempore similique ipsam qui consequatur eaque.
+      - Nulla tempore similique ipsam qui consequatur eaque.
+      pluginID: Sequi dolore minus totam aut.
+    properties:
+      dateAdded:
+        example: "1980-07-18T03:31:56Z"
+        format: date-time
+        type: string
+      permissionsAllowed:
+        example:
+        - Nulla tempore similique ipsam qui consequatur eaque.
+        - Nulla tempore similique ipsam qui consequatur eaque.
+        items:
+          example: Nulla tempore similique ipsam qui consequatur eaque.
+          type: string
+        type: array
+      pluginID:
+        example: Sequi dolore minus totam aut.
+        type: string
+    required:
+    - pluginID
+    - permissionsAllowed
+    - dateAdded
+    title: 'Mediatype identifier: user-plugin-media; view=default'
+    type: object
+  UserCollection:
+    description: UserCollection is the media type for an array of User (default view)
+    example:
+    - category:
+      - Necessitatibus tenetur.
+      - Necessitatibus tenetur.
+      - Necessitatibus tenetur.
+      firstName: Jeff
+      id: Dolorum ut et.
+      isEventAuthor: false
+      isPluginAuthor: false
+      lastName: Newmann
+      plugins:
+      - dateAdded: "1980-07-18T03:31:56Z"
+        permissionsAllowed:
+        - Nulla tempore similique ipsam qui consequatur eaque.
+        - Nulla tempore similique ipsam qui consequatur eaque.
+        pluginID: Sequi dolore minus totam aut.
+      - dateAdded: "1980-07-18T03:31:56Z"
+        permissionsAllowed:
+        - Nulla tempore similique ipsam qui consequatur eaque.
+        - Nulla tempore similique ipsam qui consequatur eaque.
+        pluginID: Sequi dolore minus totam aut.
+      profileImage: Veritatis voluptatem et sunt fuga.
+    - category:
+      - Necessitatibus tenetur.
+      - Necessitatibus tenetur.
+      - Necessitatibus tenetur.
+      firstName: Jeff
+      id: Dolorum ut et.
+      isEventAuthor: false
+      isPluginAuthor: false
+      lastName: Newmann
+      plugins:
+      - dateAdded: "1980-07-18T03:31:56Z"
+        permissionsAllowed:
+        - Nulla tempore similique ipsam qui consequatur eaque.
+        - Nulla tempore similique ipsam qui consequatur eaque.
+        pluginID: Sequi dolore minus totam aut.
+      - dateAdded: "1980-07-18T03:31:56Z"
+        permissionsAllowed:
+        - Nulla tempore similique ipsam qui consequatur eaque.
+        - Nulla tempore similique ipsam qui consequatur eaque.
+        pluginID: Sequi dolore minus totam aut.
+      profileImage: Veritatis voluptatem et sunt fuga.
+    - category:
+      - Necessitatibus tenetur.
+      - Necessitatibus tenetur.
+      - Necessitatibus tenetur.
+      firstName: Jeff
+      id: Dolorum ut et.
+      isEventAuthor: false
+      isPluginAuthor: false
+      lastName: Newmann
+      plugins:
+      - dateAdded: "1980-07-18T03:31:56Z"
+        permissionsAllowed:
+        - Nulla tempore similique ipsam qui consequatur eaque.
+        - Nulla tempore similique ipsam qui consequatur eaque.
+        pluginID: Sequi dolore minus totam aut.
+      - dateAdded: "1980-07-18T03:31:56Z"
+        permissionsAllowed:
+        - Nulla tempore similique ipsam qui consequatur eaque.
+        - Nulla tempore similique ipsam qui consequatur eaque.
+        pluginID: Sequi dolore minus totam aut.
+      profileImage: Veritatis voluptatem et sunt fuga.
+    items:
+      $ref: '#/definitions/User'
+    title: 'Mediatype identifier: user; type=collection; view=default'
+    type: array
+  amazon-register-params:
+    example:
+      email: annabel_murphy@raynor.net
+      firstName: b678tkml
+      gRecaptchaResponse: Voluptatem fugiat blanditiis fugit.
+      lastName: yo5hn9
+      oauthKey: 97484402-79d0-41df-aff8-d7eb5b20d469
+    properties:
+      email:
+        description: The email that will be connected to the account
+        example: annabel_murphy@raynor.net
+        format: email
+        type: string
+      firstName:
+        description: The given name for the user
+        example: b678tkml
+        maxLength: 50
+        minLength: 2
+        type: string
+      gRecaptchaResponse:
+        description: The recaptcha response code
+        example: Voluptatem fugiat blanditiis fugit.
+        type: string
+      lastName:
+        description: The family name for the user
+        example: yo5hn9
+        maxLength: 50
+        minLength: 2
+        type: string
+      oauthKey:
+        description: The key given when the register was approved
+        example: 97484402-79d0-41df-aff8-d7eb5b20d469
+        format: uuid
+        type: string
+    required:
+    - email
+    - firstName
+    - lastName
+    - oauthKey
+    - gRecaptchaResponse
+    title: amazon-register-params
+    type: object
+  bookmark-params:
+    example:
+      category: Consequatur accusantium occaecati sint harum ipsam.
+      description: Vitae sed aut explicabo.
+      id: Ut ipsam corrupti suscipit aliquid explicabo.
+      title: Et maxime explicabo natus.
+      type: Pariatur et inventore ex inventore.
+    properties:
+      category:
+        example: Consequatur accusantium occaecati sint harum ipsam.
+        type: string
+      description:
+        example: Vitae sed aut explicabo.
+        type: string
+      id:
+        example: Ut ipsam corrupti suscipit aliquid explicabo.
+        type: string
+      title:
+        example: Et maxime explicabo natus.
+        type: string
+      type:
+        example: Pariatur et inventore ex inventore.
+        type: string
+    title: bookmark-params
+    type: object
+  change-password-params:
+    example:
+      newPassword: 6s51f1mdr
+      oldPassword: 5qjvgd550o
+    properties:
+      newPassword:
+        description: The new password for the current user account
+        example: 6s51f1mdr
+        maxLength: 100
+        minLength: 6
+        pattern: ^.*[\w].*$
+        type: string
+      oldPassword:
+        description: The old password for the current user account
+        example: 5qjvgd550o
+        maxLength: 100
+        minLength: 6
+        pattern: ^.*[\w].*$
+        type: string
+    required:
+    - oldPassword
+    - newPassword
+    title: change-password-params
+    type: object
+  error:
+    description: Error response media type (default view)
+    example:
+      code: invalid_value
+      detail: Value of ID must be an integer
+      id: 3F1FKVRR
+      meta:
+        timestamp: 1458609066
+      status: "400"
+    properties:
+      code:
+        description: an application-specific error code, expressed as a string value.
+        example: invalid_value
+        type: string
+      detail:
+        description: a human-readable explanation specific to this occurrence of the
+          problem.
+        example: Value of ID must be an integer
+        type: string
+      id:
+        description: a unique identifier for this particular occurrence of the problem.
+        example: 3F1FKVRR
+        type: string
+      meta:
+        additionalProperties: true
+        description: a meta object containing non-standard meta-information about
+          the error.
+        example:
+          timestamp: 1458609066
+        type: object
+      status:
+        description: the HTTP status code applicable to this problem, expressed as
+          a string value.
+        example: "400"
+        type: string
+    title: 'Mediatype identifier: application/vnd.goa.error; view=default'
+    type: object
+  facebook-register-params:
+    example:
+      email: corbin@medhurst.biz
+      firstName: 5mvq
+      gRecaptchaResponse: Aut aut.
+      lastName: 3lp
+      oauthKey: 79516c78-eb96-4639-a190-ba7aa19f00c6
+    properties:
+      email:
+        description: The email that will be connected to the account
+        example: corbin@medhurst.biz
+        format: email
+        type: string
+      firstName:
+        description: The given name for the user
+        example: 5mvq
+        maxLength: 50
+        minLength: 2
+        type: string
+      gRecaptchaResponse:
+        description: The recaptcha response code
+        example: Aut aut.
+        type: string
+      lastName:
+        description: The family name for the user
+        example: 3lp
+        maxLength: 50
+        minLength: 2
+        type: string
+      oauthKey:
+        description: The key given when the register was approved
+        example: 79516c78-eb96-4639-a190-ba7aa19f00c6
+        format: uuid
+        type: string
+    required:
+    - email
+    - firstName
+    - lastName
+    - oauthKey
+    - gRecaptchaResponse
+    title: facebook-register-params
+    type: object
+  google-register-params:
+    example:
+      email: marques@spinka.org
+      firstName: 1fj2uc8vip
+      gRecaptchaResponse: Doloremque id illo culpa facere vel.
+      lastName: y9m9wo
+      oauthKey: e759e8d1-07cd-439c-958e-33b142b9a185
+    properties:
+      email:
+        description: The email that will be connected to the account
+        example: marques@spinka.org
+        format: email
+        type: string
+      firstName:
+        description: The given name for the user
+        example: 1fj2uc8vip
+        maxLength: 50
+        minLength: 2
+        type: string
+      gRecaptchaResponse:
+        description: The recaptcha response code
+        example: Doloremque id illo culpa facere vel.
+        type: string
+      lastName:
+        description: The family name for the user
+        example: y9m9wo
+        maxLength: 50
+        minLength: 2
+        type: string
+      oauthKey:
+        description: The key given when the register was approved
+        example: e759e8d1-07cd-439c-958e-33b142b9a185
+        format: uuid
+        type: string
+    required:
+    - email
+    - firstName
+    - lastName
+    - oauthKey
+    - gRecaptchaResponse
+    title: google-register-params
+    type: object
+  linkedin-register-params:
+    example:
+      email: tyrique.rippin@berge.info
+      firstName: gp
+      gRecaptchaResponse: Neque vel.
+      lastName: mqyi
+      oauthKey: d97a1516-0971-4c42-bb65-ae1ada8298a1
+    properties:
+      email:
+        description: The email that will be connected to the account
+        example: tyrique.rippin@berge.info
+        format: email
+        type: string
+      firstName:
+        description: The given name for the user
+        example: gp
+        maxLength: 50
+        minLength: 2
+        type: string
+      gRecaptchaResponse:
+        description: The recaptcha response code
+        example: Neque vel.
+        type: string
+      lastName:
+        description: The family name for the user
+        example: mqyi
+        maxLength: 50
+        minLength: 2
+        type: string
+      oauthKey:
+        description: The key given when the register was approved
+        example: d97a1516-0971-4c42-bb65-ae1ada8298a1
+        format: uuid
+        type: string
+    required:
+    - email
+    - firstName
+    - lastName
+    - oauthKey
+    - gRecaptchaResponse
+    title: linkedin-register-params
+    type: object
+  login-params:
+    example:
+      TwoFactor: j0ckq1v
+      email: soledad_harvey@rice.name
+      password: 7vqw047u
+    properties:
+      TwoFactor:
+        description: 2 Factor Auth if user has enabled the feature
+        example: j0ckq1v
+        maxLength: 8
+        minLength: 6
+        type: string
+      email:
+        description: The email address of the account to login to
+        example: soledad_harvey@rice.name
+        format: email
+        type: string
+      password:
+        description: The password of the account to login to
+        example: 7vqw047u
+        maxLength: 100
+        minLength: 6
+        pattern: ^.*[\w].*$
+        type: string
+    required:
+    - email
+    - password
+    title: login-params
+    type: object
+  microsoft-register-params:
+    example:
+      email: dario.kilback@starkkirlin.name
+      firstName: 3ci
+      gRecaptchaResponse: Veniam doloremque est doloremque sunt doloremque ut.
+      lastName: g34dbxb
+      oauthKey: a5461361-373c-4683-a626-4976e77f3007
+    properties:
+      email:
+        description: The email that will be connected to the account
+        example: dario.kilback@starkkirlin.name
+        format: email
+        type: string
+      firstName:
+        description: The given name for the user
+        example: 3ci
+        maxLength: 50
+        minLength: 2
+        type: string
+      gRecaptchaResponse:
+        description: The recaptcha response code
+        example: Veniam doloremque est doloremque sunt doloremque ut.
+        type: string
+      lastName:
+        description: The family name for the user
+        example: g34dbxb
+        maxLength: 50
+        minLength: 2
+        type: string
+      oauthKey:
+        description: The key given when the register was approved
+        example: a5461361-373c-4683-a626-4976e77f3007
+        format: uuid
+        type: string
+    required:
+    - email
+    - firstName
+    - lastName
+    - oauthKey
+    - gRecaptchaResponse
+    title: microsoft-register-params
+    type: object
+  newsletter-param:
+    description: Parameters to add/remove a newsletter subscriber
+    example:
+      email: kari.bartoletti@goyette.info
+      isActive: false
+      subscribedAt: "2008-09-12T01:02:28Z"
+    properties:
+      email:
+        example: kari.bartoletti@goyette.info
+        format: email
+        type: string
+      isActive:
+        example: false
+        type: boolean
+      subscribedAt:
+        example: "2008-09-12T01:02:28Z"
+        format: date-time
+        type: string
+    title: newsletter-param
+    type: object
+  register-params:
+    example:
+      category:
+      - Optio qui similique voluptatibus debitis.
+      - Optio qui similique voluptatibus debitis.
+      - Optio qui similique voluptatibus debitis.
+      email: velva@fritschritchie.name
+      firstName: t9gsas
+      gRecaptchaResponse: Odio repudiandae.
+      lastName: mln9dwqsoi
+      password: w6zecodyel
+    properties:
+      category:
+        description: Category/Categories that a user might select (User interests)
+        example:
+        - Optio qui similique voluptatibus debitis.
+        - Optio qui similique voluptatibus debitis.
+        - Optio qui similique voluptatibus debitis.
+        items:
+          example: Optio qui similique voluptatibus debitis.
+          type: string
+        type: array
+      email:
+        description: The email that will be attached to the account
+        example: velva@fritschritchie.name
+        format: email
+        type: string
+      firstName:
+        description: The user's given name
+        example: t9gsas
+        maxLength: 50
+        minLength: 2
+        type: string
+      gRecaptchaResponse:
+        description: The recaptcha response code
+        example: Odio repudiandae.
+        type: string
+      lastName:
+        description: The user's family name
+        example: mln9dwqsoi
+        maxLength: 50
+        type: string
+      password:
+        description: The password associated with the new account
+        example: w6zecodyel
+        maxLength: 100
+        minLength: 6
+        pattern: ^.*[\w].*$
+        type: string
+    required:
+    - email
+    - password
+    - firstName
+    - lastName
+    - gRecaptchaResponse
+    - category
+    title: register-params
+    type: object
+  reset-password-params:
+    example:
+      newPassword: 854x22
+      resetCode: Qui cupiditate rerum.
+      userID: Et et perspiciatis.
+    properties:
+      newPassword:
+        description: The new password that will be used to login to the account
+        example: 854x22
+        maxLength: 100
+        minLength: 6
+        pattern: ^.*[\w].*$
+        type: string
+      resetCode:
+        description: The UUID of the password reset, send from the user's email
+        example: Qui cupiditate rerum.
+        type: string
+      userID:
+        description: The ID of the user to reset the password of
+        example: Et et perspiciatis.
+        type: string
+    required:
+    - resetCode
+    - userID
+    - newPassword
+    title: reset-password-params
+    type: object
+  twitter-register-params:
+    example:
+      email: janice.bauch@hahnstrosin.org
+      firstName: yih9jmtxcl
+      gRecaptchaResponse: Eligendi eum aut et velit odio.
+      lastName: cbwgwfcwg
+      oauthKey: 96b17925-5b57-4624-aa44-6d25e434b101
+    properties:
+      email:
+        description: The email that will be connected to the account
+        example: janice.bauch@hahnstrosin.org
+        format: email
+        type: string
+      firstName:
+        description: The given name for the user
+        example: yih9jmtxcl
+        maxLength: 50
+        minLength: 2
+        type: string
+      gRecaptchaResponse:
+        description: The recaptcha response code
+        example: Eligendi eum aut et velit odio.
+        type: string
+      lastName:
+        description: The family name for the user
+        example: cbwgwfcwg
+        maxLength: 50
+        minLength: 2
+        type: string
+      oauthKey:
+        description: The key given when the register was approved
+        example: 96b17925-5b57-4624-aa44-6d25e434b101
+        format: uuid
+        type: string
+    required:
+    - email
+    - firstName
+    - lastName
+    - oauthKey
+    - gRecaptchaResponse
+    title: twitter-register-params
+    type: object
+  user-params:
+    example:
+      category:
+      - Sequi cumque consequuntur natus assumenda aut.
+      - Sequi cumque consequuntur natus assumenda aut.
+      email: dorris@balistreri.name
+      firstName: Jeff
+      gender: Harum animi.
+      getNewsletter: false
+      isEventAuthor: true
+      isPluginAuthor: false
+      lastName: Newmann
+      phone: Ratione vero aut.
+      profileImage: Amet adipisci iusto nam enim deserunt.
+    properties:
+      category:
+        description: Category/Categories that a user might select (User interests)
+        example:
+        - Sequi cumque consequuntur natus assumenda aut.
+        - Sequi cumque consequuntur natus assumenda aut.
+        items:
+          example: Sequi cumque consequuntur natus assumenda aut.
+          type: string
+        type: array
+      email:
+        description: The primary email of the user
+        example: dorris@balistreri.name
+        format: email
+        type: string
+      firstName:
+        description: Given name for the user
+        example: Jeff
+        maxLength: 50
+        minLength: 2
+        type: string
+      gender:
+        example: Harum animi.
+        type: string
+      getNewsletter:
+        description: True if the user wants to receive the newsletter
+        example: false
+        type: boolean
+      isEventAuthor:
+        description: True if user is a event author
+        example: true
+        type: boolean
+      isPluginAuthor:
+        description: True if user is a plugin author
+        example: false
+        type: boolean
+      lastName:
+        description: Family name for the user
+        example: Newmann
+        maxLength: 50
+        minLength: 2
+        type: string
+      phone:
+        example: Ratione vero aut.
+        type: string
+      profileImage:
+        example: Amet adipisci iusto nam enim deserunt.
+        type: string
+    title: user-params
+    type: object
+  user-params-admin:
+    example:
+      getNewsletter: false
+      isAdmin: false
+      isEventAuthor: true
+      isPluginAuthor: true
+      verifiedEmail: true
+    properties:
+      getNewsletter:
+        example: false
+        type: boolean
+      isAdmin:
+        example: false
+        type: boolean
+      isEventAuthor:
+        example: true
+        type: boolean
+      isPluginAuthor:
+        example: true
+        type: boolean
+      verifiedEmail:
+        example: true
+        type: boolean
+    title: user-params-admin
+    type: object
+  user-plugin:
+    example:
+      permissionsAllowed:
+      - Doloribus quis fugiat officia exercitationem.
+      - Doloribus quis fugiat officia exercitationem.
+      - Doloribus quis fugiat officia exercitationem.
+      pluginID: Aperiam non voluptatem et non dicta et.
+    properties:
+      permissionsAllowed:
+        example:
+        - Doloribus quis fugiat officia exercitationem.
+        - Doloribus quis fugiat officia exercitationem.
+        - Doloribus quis fugiat officia exercitationem.
+        items:
+          example: Doloribus quis fugiat officia exercitationem.
+          type: string
+        type: array
+      pluginID:
+        example: Aperiam non voluptatem et non dicta et.
+        type: string
+    title: user-plugin
+    type: object
+host: localhost:3000
+info:
+  description: A service that manages users and authentication to various services
+  title: Users and authentication
+  version: ""
+paths:
+  /api/v1/user/auth/amazon/attach:
+    post:
+      description: Attaches a Amazon account to an existing user account, returns
+        the URL the browser should be redirected to
+      operationId: amazon#attach-to-account
+      produces:
+      - application/vnd.goa.error
+      - text/plain
+      responses:
+        "200":
+          description: OK
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - jwt: []
+      summary: attach-to-account amazon
+      tags:
+      - amazon
+  /api/v1/user/auth/amazon/detach:
+    post:
+      description: Detaches a Amazon account from an existing user account.
+      operationId: amazon#detach-from-account
+      produces:
+      - OK
+      - application/vnd.goa.error
+      responses:
+        "200":
+          description: OK
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/error'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - jwt: []
+      summary: detach-from-account amazon
+      tags:
+      - amazon
+  /api/v1/user/auth/amazon/login:
+    get:
+      description: Gets the URL the front-end should redirect the browser to in order
+        to be authenticated with Amazon, to be logged in
+      operationId: amazon#login
+      parameters:
+      - description: A merge token for merging into an account
+        in: query
+        name: token
+        required: false
+        type: string
+      produces:
+      - application/vnd.goa.error
+      - text/plain
+      responses:
+        "200":
+          description: OK
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - key: []
+      summary: login amazon
+      tags:
+      - amazon
+  /api/v1/user/auth/amazon/receive:
+    get:
+      description: The endpoint that Amazon redirects the browser to after the user
+        has authenticated
+      operationId: amazon#receive
+      parameters:
+      - in: query
+        name: code
+        required: true
+        type: string
+      - in: query
+        name: state
+        required: true
+        type: string
+      produces:
+      - application/vnd.goa.error
+      - text/plain
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/error'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - key: []
+      summary: receive amazon
+      tags:
+      - amazon
+  /api/v1/user/auth/amazon/register:
+    post:
+      description: Registers a new account with the system, with Amazon as the login
+        system
+      operationId: amazon#register
+      parameters:
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/amazon-register-params'
+      produces:
+      - application/vnd.goa.error
+      - user
+      responses:
+        "200":
+          description: OK
+          headers:
+            Authorization:
+              type: string
+            X-Session:
+              type: string
+          schema:
+            $ref: '#/definitions/User'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/error'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/error'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - key: []
+      summary: register amazon
+      tags:
+      - amazon
+  /api/v1/user/auth/amazon/register-start:
+    get:
+      description: Gets the URL the front-end should redirect the browser to in order
+        to be authenticated with Amazon, and then register
+      operationId: amazon#register-url
+      produces:
+      - application/vnd.goa.error
+      - text/plain
+      responses:
+        "200":
+          description: OK
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - key: []
+      summary: register-url amazon
+      tags:
+      - amazon
+  /api/v1/user/auth/change-password:
+    post:
+      description: Changes the user's current password to a new one, also adds a password
+        to the account if there is none
+      operationId: password-auth#change-password
+      parameters:
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/change-password-params'
+      produces:
+      - OK
+      - application/vnd.goa.error
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - jwt: []
+      summary: change-password password-auth
+      tags:
+      - password-auth
+  /api/v1/user/auth/clean/sessions:
+    get:
+      description: Deletes all the sessions that have expired
+      operationId: session#clean-sessions
+      produces:
+      - OK
+      - application/vnd.goa.error
+      responses:
+        "200":
+          description: OK
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - jwt: []
+      summary: clean-sessions session
+      tags:
+      - session
+  /api/v1/user/auth/clean/token/login:
+    get:
+      description: Cleans old login tokens from the database
+      operationId: session#clean-login-token
+      produces:
+      - OK
+      - application/vnd.goa.error
+      responses:
+        "200":
+          description: OK
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - jwt: []
+      summary: clean-login-token session
+      tags:
+      - session
+  /api/v1/user/auth/clean/token/merge:
+    get:
+      description: Cleans old account merge tokens from the database
+      operationId: session#clean-merge-token
+      produces:
+      - OK
+      - application/vnd.goa.error
+      responses:
+        "200":
+          description: OK
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - jwt: []
+      summary: clean-merge-token session
+      tags:
+      - session
+  /api/v1/user/auth/facebook/attach:
+    post:
+      description: Attaches a Facebook account to an existing user account, returns
+        the URL the browser should be redirected to
+      operationId: facebook#attach-to-account
+      produces:
+      - application/vnd.goa.error
+      - text/plain
+      responses:
+        "200":
+          description: OK
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - jwt: []
+      summary: attach-to-account facebook
+      tags:
+      - facebook
+  /api/v1/user/auth/facebook/detach:
+    post:
+      description: Detaches a Facebook account from an existing user account.
+      operationId: facebook#detach-from-account
+      produces:
+      - OK
+      - application/vnd.goa.error
+      responses:
+        "200":
+          description: OK
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/error'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - jwt: []
+      summary: detach-from-account facebook
+      tags:
+      - facebook
+  /api/v1/user/auth/facebook/login:
+    get:
+      description: Gets the URL the front-end should redirect the browser to in order
+        to be authenticated with Facebook, to be logged in
+      operationId: facebook#login
+      parameters:
+      - description: A merge token for merging into an account
+        in: query
+        name: token
+        required: false
+        type: string
+      produces:
+      - application/vnd.goa.error
+      - text/plain
+      responses:
+        "200":
+          description: OK
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - key: []
+      summary: login facebook
+      tags:
+      - facebook
+  /api/v1/user/auth/facebook/receive:
+    get:
+      description: The endpoint that Facebook redirects the browser to after the user
+        has authenticated
+      operationId: facebook#receive
+      parameters:
+      - in: query
+        name: code
+        required: true
+        type: string
+      - in: query
+        name: state
+        required: true
+        type: string
+      produces:
+      - application/vnd.goa.error
+      - text/plain
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/error'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - key: []
+      summary: receive facebook
+      tags:
+      - facebook
+  /api/v1/user/auth/facebook/register:
+    post:
+      description: Registers a new account with the system, with Facebook as the login
+        system
+      operationId: facebook#register
+      parameters:
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/facebook-register-params'
+      produces:
+      - application/vnd.goa.error
+      - user
+      responses:
+        "200":
+          description: OK
+          headers:
+            Authorization:
+              type: string
+            X-Session:
+              type: string
+          schema:
+            $ref: '#/definitions/User'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/error'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/error'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - key: []
+      summary: register facebook
+      tags:
+      - facebook
+  /api/v1/user/auth/facebook/register-start:
+    get:
+      description: Gets the URL the front-end should redirect the browser to in order
+        to be authenticated with Facebook, and then register
+      operationId: facebook#register-url
+      produces:
+      - application/vnd.goa.error
+      - text/plain
+      responses:
+        "200":
+          description: OK
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - key: []
+      summary: register-url facebook
+      tags:
+      - facebook
+  /api/v1/user/auth/finalize-reset:
+    post:
+      description: Confirms that a reset has been completed and changes the password
+        to the new one passed in
+      operationId: password-auth#confirm-reset
+      parameters:
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/reset-password-params'
+      produces:
+      - OK
+      - application/vnd.goa.error
+      responses:
+        "200":
+          description: OK
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - key: []
+      summary: confirm-reset password-auth
+      tags:
+      - password-auth
+  /api/v1/user/auth/google/attach:
+    post:
+      description: Attaches a Google account to an existing user account, returns
+        the URL the browser should be redirected to
+      operationId: google#attach-to-account
+      produces:
+      - application/vnd.goa.error
+      - text/plain
+      responses:
+        "200":
+          description: OK
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - jwt: []
+      summary: attach-to-account google
+      tags:
+      - google
+  /api/v1/user/auth/google/detach:
+    post:
+      description: Detaches a Google account from an existing user account.
+      operationId: google#detach-from-account
+      produces:
+      - OK
+      - application/vnd.goa.error
+      responses:
+        "200":
+          description: OK
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/error'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - jwt: []
+      summary: detach-from-account google
+      tags:
+      - google
+  /api/v1/user/auth/google/login:
+    get:
+      description: Gets the URL the front-end should redirect the browser to in order
+        to be authenticated with Google, to be logged in
+      operationId: google#login
+      parameters:
+      - description: A merge token for merging into an account
+        in: query
+        name: token
+        required: false
+        type: string
+      produces:
+      - application/vnd.goa.error
+      - text/plain
+      responses:
+        "200":
+          description: OK
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - key: []
+      summary: login google
+      tags:
+      - google
+  /api/v1/user/auth/google/receive:
+    get:
+      description: The endpoint that Google redirects the browser to after the user
+        has authenticated
+      operationId: google#receive
+      parameters:
+      - in: query
+        name: code
+        required: true
+        type: string
+      - in: query
+        name: state
+        required: true
+        type: string
+      produces:
+      - application/vnd.goa.error
+      - text/plain
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/error'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - key: []
+      summary: receive google
+      tags:
+      - google
+  /api/v1/user/auth/google/register:
+    post:
+      description: Registers a new account with the system, with Google as the login
+        system
+      operationId: google#register
+      parameters:
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/google-register-params'
+      produces:
+      - application/vnd.goa.error
+      - user
+      responses:
+        "200":
+          description: OK
+          headers:
+            Authorization:
+              type: string
+            X-Session:
+              type: string
+          schema:
+            $ref: '#/definitions/User'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/error'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/error'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - key: []
+      summary: register google
+      tags:
+      - google
+  /api/v1/user/auth/google/register-start:
+    get:
+      description: Gets the URL the front-end should redirect the browser to in order
+        to be authenticated with Google, and then register
+      operationId: google#register-url
+      produces:
+      - application/vnd.goa.error
+      - text/plain
+      responses:
+        "200":
+          description: OK
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - key: []
+      summary: register-url google
+      tags:
+      - google
+  /api/v1/user/auth/linkedin/attach:
+    post:
+      description: Attaches a Linkedin account to an existing user account, returns
+        the URL the browser should be redirected to
+      operationId: linkedin#attach-to-account
+      produces:
+      - application/vnd.goa.error
+      - text/plain
+      responses:
+        "200":
+          description: OK
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - jwt: []
+      summary: attach-to-account linkedin
+      tags:
+      - linkedin
+  /api/v1/user/auth/linkedin/detach:
+    post:
+      description: Detaches a Linkedin account from an existing user account.
+      operationId: linkedin#detach-from-account
+      produces:
+      - OK
+      - application/vnd.goa.error
+      responses:
+        "200":
+          description: OK
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/error'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - jwt: []
+      summary: detach-from-account linkedin
+      tags:
+      - linkedin
+  /api/v1/user/auth/linkedin/login:
+    get:
+      description: Gets the URL the front-end should redirect the browser to in order
+        to be authenticated with Linkedin, to be logged in
+      operationId: linkedin#login
+      parameters:
+      - description: A merge token for merging into an account
+        in: query
+        name: token
+        required: false
+        type: string
+      produces:
+      - application/vnd.goa.error
+      - text/plain
+      responses:
+        "200":
+          description: OK
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - key: []
+      summary: login linkedin
+      tags:
+      - linkedin
+  /api/v1/user/auth/linkedin/receive:
+    get:
+      description: The endpoint that Linkedin redirects the browser to after the user
+        has authenticated
+      operationId: linkedin#receive
+      parameters:
+      - in: query
+        name: code
+        required: true
+        type: string
+      - in: query
+        name: state
+        required: true
+        type: string
+      produces:
+      - application/vnd.goa.error
+      - text/plain
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/error'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - key: []
+      summary: receive linkedin
+      tags:
+      - linkedin
+  /api/v1/user/auth/linkedin/register:
+    post:
+      description: Registers a new account with the system, with Linkedin as the login
+        system
+      operationId: linkedin#register
+      parameters:
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/linkedin-register-params'
+      produces:
+      - application/vnd.goa.error
+      - user
+      responses:
+        "200":
+          description: OK
+          headers:
+            Authorization:
+              type: string
+            X-Session:
+              type: string
+          schema:
+            $ref: '#/definitions/User'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/error'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/error'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - key: []
+      summary: register linkedin
+      tags:
+      - linkedin
+  /api/v1/user/auth/linkedin/register-start:
+    get:
+      description: Gets the URL the front-end should redirect the browser to in order
+        to be authenticated with Linkedin, and then register
+      operationId: linkedin#register-url
+      produces:
+      - application/vnd.goa.error
+      - text/plain
+      responses:
+        "200":
+          description: OK
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - key: []
+      summary: register-url linkedin
+      tags:
+      - linkedin
+  /api/v1/user/auth/login:
+    post:
+      description: Login a user using an email and password
+      operationId: password-auth#login
+      parameters:
+      - description: A merge token for merging into an account
+        in: query
+        name: token
+        required: false
+        type: string
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/login-params'
+      produces:
+      - application/vnd.goa.error
+      - user
+      responses:
+        "200":
+          description: OK
+          headers:
+            Authorization:
+              type: string
+            X-Session:
+              type: string
+          schema:
+            $ref: '#/definitions/User'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/error'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - key: []
+      summary: login password-auth
+      tags:
+      - password-auth
+  /api/v1/user/auth/logout:
+    post:
+      description: Takes a user's auth token, and logs-out the session associated
+        with it
+      operationId: session#logout
+      produces:
+      - OK
+      - application/vnd.goa.error
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - jwt: []
+      summary: logout session
+      tags:
+      - session
+  /api/v1/user/auth/logout/{session}-id:
+    post:
+      description: Logout of a specific session
+      operationId: session#logout-specific
+      parameters:
+      - in: path
+        name: session
+        required: true
+        type: string
+      - in: query
+        name: session-id
+        required: true
+        type: string
+      produces:
+      - OK
+      - application/vnd.goa.error
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/error'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - jwt: []
+      summary: logout-specific session
+      tags:
+      - session
+  /api/v1/user/auth/logout/all:
+    post:
+      description: Logout all sessions for the current user except their current session
+      operationId: session#logout-other
+      produces:
+      - OK
+      - application/vnd.goa.error
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - jwt: []
+      summary: logout-other session
+      tags:
+      - session
+  /api/v1/user/auth/microsoft/attach:
+    post:
+      description: Attaches a Microsoft account to an existing user account, returns
+        the URL the browser should be redirected to
+      operationId: microsoft#attach-to-account
+      produces:
+      - application/vnd.goa.error
+      - text/plain
+      responses:
+        "200":
+          description: OK
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - jwt: []
+      summary: attach-to-account microsoft
+      tags:
+      - microsoft
+  /api/v1/user/auth/microsoft/detach:
+    post:
+      description: Detaches a Microsoft account from an existing user account.
+      operationId: microsoft#detach-from-account
+      produces:
+      - OK
+      - application/vnd.goa.error
+      responses:
+        "200":
+          description: OK
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/error'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - jwt: []
+      summary: detach-from-account microsoft
+      tags:
+      - microsoft
+  /api/v1/user/auth/microsoft/login:
+    get:
+      description: Gets the URL the front-end should redirect the browser to in order
+        to be authenticated with Microsoft, to be logged in
+      operationId: microsoft#login
+      parameters:
+      - description: A merge token for merging into an account
+        in: query
+        name: token
+        required: false
+        type: string
+      produces:
+      - application/vnd.goa.error
+      - text/plain
+      responses:
+        "200":
+          description: OK
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - key: []
+      summary: login microsoft
+      tags:
+      - microsoft
+  /api/v1/user/auth/microsoft/receive:
+    get:
+      description: The endpoint that Microsoft redirects the browser to after the
+        user has authenticated
+      operationId: microsoft#receive
+      parameters:
+      - in: query
+        name: code
+        required: true
+        type: string
+      - in: query
+        name: state
+        required: true
+        type: string
+      produces:
+      - application/vnd.goa.error
+      - text/plain
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/error'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - key: []
+      summary: receive microsoft
+      tags:
+      - microsoft
+  /api/v1/user/auth/microsoft/register:
+    post:
+      description: Registers a new account with the system, with Microsoft as the
+        login system
+      operationId: microsoft#register
+      parameters:
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/microsoft-register-params'
+      produces:
+      - application/vnd.goa.error
+      - user
+      responses:
+        "200":
+          description: OK
+          headers:
+            Authorization:
+              type: string
+            X-Session:
+              type: string
+          schema:
+            $ref: '#/definitions/User'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/error'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/error'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - key: []
+      summary: register microsoft
+      tags:
+      - microsoft
+  /api/v1/user/auth/microsoft/register-start:
+    get:
+      description: Gets the URL the front-end should redirect the browser to in order
+        to be authenticated with Microsoft, and then register
+      operationId: microsoft#register-url
+      produces:
+      - application/vnd.goa.error
+      - text/plain
+      responses:
+        "200":
+          description: OK
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - key: []
+      summary: register-url microsoft
+      tags:
+      - microsoft
+  /api/v1/user/auth/register:
+    post:
+      description: Register a new user with an email and password
+      operationId: password-auth#register
+      parameters:
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/register-params'
+      produces:
+      - application/vnd.goa.error
+      - user
+      responses:
+        "200":
+          description: OK
+          headers:
+            Authorization:
+              type: string
+            X-Session:
+              type: string
+          schema:
+            $ref: '#/definitions/User'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/error'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - key: []
+      summary: register password-auth
+      tags:
+      - password-auth
+  /api/v1/user/auth/remove-password:
+    post:
+      description: Removes using a password as a login method
+      operationId: password-auth#remove
+      produces:
+      - OK
+      - application/vnd.goa.error
+      responses:
+        "200":
+          description: OK
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/error'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - jwt: []
+      summary: remove password-auth
+      tags:
+      - password-auth
+  /api/v1/user/auth/reset-password:
+    post:
+      description: Send an email to user to get a password reset, responds with no
+        content even if the email is not on any user account
+      operationId: password-auth#reset
+      parameters:
+      - description: Email of the account to send a password reset
+        format: email
+        in: query
+        name: email
+        required: true
+        type: string
+      - description: URL to redirect to from the user's email link
+        in: query
+        name: redirect-url
+        required: true
+        type: string
+      produces:
+      - OK
+      - application/vnd.goa.error
+      responses:
+        "200":
+          description: OK
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - key: []
+      summary: reset password-auth
+      tags:
+      - password-auth
+  /api/v1/user/auth/session:
+    post:
+      description: Take a user's session token and refresh it, also returns a new
+        authentication token
+      operationId: session#refresh
+      parameters:
+      - in: header
+        name: X-Session
+        required: true
+        type: string
+      produces:
+      - application/vnd.goa.error
+      - text/plain
+      responses:
+        "200":
+          description: OK
+          headers:
+            Authorization:
+              type: string
+            X-Session:
+              type: string
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/error'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      summary: refresh session
+      tags:
+      - session
+  /api/v1/user/auth/sessions:
+    get:
+      description: Gets all of the sessions that are associated with the currently
+        logged in user
+      operationId: session#get-sessions
+      produces:
+      - all-sessions
+      - application/vnd.goa.error
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/All-Sessions'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - jwt: []
+      summary: get-sessions session
+      tags:
+      - session
+  /api/v1/user/auth/token:
+    post:
+      description: Redeems a login token for credentials
+      operationId: session#redeemToken
+      parameters:
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/RedeemTokenSessionPayload'
+      produces:
+      - application/vnd.goa.error
+      responses:
+        "201":
+          description: Created
+          headers:
+            Authorization:
+              type: string
+            X-Session:
+              type: string
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      summary: redeemToken session
+      tags:
+      - session
+  /api/v1/user/auth/twitter/attach:
+    post:
+      description: Attaches a Twitter account to an existing user account, returns
+        the URL the browser should be redirected to
+      operationId: twitter#attach-to-account
+      produces:
+      - application/vnd.goa.error
+      - text/plain
+      responses:
+        "200":
+          description: OK
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - jwt: []
+      summary: attach-to-account twitter
+      tags:
+      - twitter
+  /api/v1/user/auth/twitter/detach:
+    post:
+      description: Detaches a Twitter account from an existing user account.
+      operationId: twitter#detach-from-account
+      produces:
+      - OK
+      - application/vnd.goa.error
+      responses:
+        "200":
+          description: OK
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/error'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - jwt: []
+      summary: detach-from-account twitter
+      tags:
+      - twitter
+  /api/v1/user/auth/twitter/login:
+    get:
+      description: Gets the URL the front-end should redirect the browser to in order
+        to be authenticated with Twitter, to be logged in
+      operationId: twitter#login
+      parameters:
+      - description: A merge token for merging into an account
+        in: query
+        name: token
+        required: false
+        type: string
+      produces:
+      - application/vnd.goa.error
+      - text/plain
+      responses:
+        "200":
+          description: OK
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - key: []
+      summary: login twitter
+      tags:
+      - twitter
+  /api/v1/user/auth/twitter/receive:
+    get:
+      description: The endpoint that Twitter redirects the browser to after the user
+        has authenticated
+      operationId: twitter#receive
+      parameters:
+      - in: query
+        name: oauth_token
+        required: true
+        type: string
+      - in: query
+        name: oauth_verifier
+        required: true
+        type: string
+      - in: query
+        name: state
+        required: true
+        type: string
+      produces:
+      - application/vnd.goa.error
+      - text/plain
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/error'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - key: []
+      summary: receive twitter
+      tags:
+      - twitter
+  /api/v1/user/auth/twitter/register:
+    post:
+      description: Registers a new account with the system, with Twitter as the login
+        system
+      operationId: twitter#register
+      parameters:
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/twitter-register-params'
+      produces:
+      - application/vnd.goa.error
+      - user
+      responses:
+        "200":
+          description: OK
+          headers:
+            Authorization:
+              type: string
+            X-Session:
+              type: string
+          schema:
+            $ref: '#/definitions/User'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/error'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/error'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - key: []
+      summary: register twitter
+      tags:
+      - twitter
+  /api/v1/user/auth/twitter/register-start:
+    get:
+      description: Gets the URL the front-end should redirect the browser to in order
+        to be authenticated with Twitter, and then register
+      operationId: twitter#register-url
+      produces:
+      - application/vnd.goa.error
+      - text/plain
+      responses:
+        "200":
+          description: OK
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - key: []
+      summary: register-url twitter
+      tags:
+      - twitter
+  /api/v1/user/bookmark:
+    delete:
+      description: remove a post or video from bookmarks
+      operationId: bookmark#removeFromBookmark
+      parameters:
+      - description: ID of the resource to be deleted
+        in: query
+        name: id
+        required: false
+        type: string
+      produces:
+      - application/vnd.goa.error
+      - bookmark
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Bookmark'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/error'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/error'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - jwt: []
+      summary: removeFromBookmark bookmark
+      tags:
+      - bookmark
+    get:
+      description: get all bookmarks
+      operationId: bookmark#getBookmarks
+      produces:
+      - application/vnd.goa.error
+      - bookmark
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Bookmark'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/error'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/error'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - jwt: []
+      summary: getBookmarks bookmark
+      tags:
+      - bookmark
+  /api/v1/user/bookmark/post:
+    get:
+      description: get all post bookmarks
+      operationId: bookmark#getPostBookmarks
+      produces:
+      - application/vnd.goa.error
+      - bookmark
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Bookmark'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/error'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/error'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - jwt: []
+      summary: getPostBookmarks bookmark
+      tags:
+      - bookmark
+    put:
+      description: add a post to bookmarks
+      operationId: bookmark#addPost
+      parameters:
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/bookmark-params'
+      produces:
+      - application/vnd.goa.error
+      - bookmark
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Bookmark'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/error'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/error'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - jwt: []
+      summary: addPost bookmark
+      tags:
+      - bookmark
+  /api/v1/user/bookmark/video:
+    get:
+      description: get all video bookmarks
+      operationId: bookmark#getVideoBookmarks
+      produces:
+      - application/vnd.goa.error
+      - bookmark
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Bookmark'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/error'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/error'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - jwt: []
+      summary: getVideoBookmarks bookmark
+      tags:
+      - bookmark
+    put:
+      description: add a video to bookmarks
+      operationId: bookmark#addVideo
+      parameters:
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/bookmark-params'
+      produces:
+      - application/vnd.goa.error
+      - bookmark
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Bookmark'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/error'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/error'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - jwt: []
+      summary: addVideo bookmark
+      tags:
+      - bookmark
+  /api/v1/user/newsletter:
+    delete:
+      description: Remove a newsletter subscriber
+      operationId: newsletter#remove-subscriber
+      parameters:
+      - format: email
+        in: query
+        name: email
+        required: false
+        type: string
+      produces:
+      - OK
+      - application/vnd.goa.error
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/error'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - key: []
+      summary: remove-subscriber newsletter
+      tags:
+      - newsletter
+    get:
+      description: Get a Subscriber using their email
+      operationId: newsletter#get-subscriber-by-email
+      parameters:
+      - format: email
+        in: query
+        name: email
+        required: false
+        type: string
+      produces:
+      - application/vnd.goa.error
+      - newsletter-subscriber
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Newsletter-Subscriber'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/error'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - key: []
+      summary: get-subscriber-by-email newsletter
+      tags:
+      - newsletter
+    patch:
+      description: Update a newsletter subscriber
+      operationId: newsletter#update-subscriber
+      parameters:
+      - description: Parameters to add/remove a newsletter subscriber
+        in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/newsletter-param'
+      produces:
+      - OK
+      - application/vnd.goa.error
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/error'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - key: []
+      summary: update-subscriber newsletter
+      tags:
+      - newsletter
+    post:
+      description: Add a new newsletter subscriber
+      operationId: newsletter#add-subscriber
+      parameters:
+      - description: Parameters to add/remove a newsletter subscriber
+        in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/newsletter-param'
+      produces:
+      - OK
+      - application/vnd.goa.error
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/error'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - key: []
+      summary: add-subscriber newsletter
+      tags:
+      - newsletter
+  /api/v1/user/newsletter/all:
+    get:
+      description: Get All Subscribers
+      operationId: newsletter#get-subscribers
+      produces:
+      - application/vnd.goa.error
+      - newsletter-subscriber; type=collection
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Newsletter-SubscriberCollection'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/error'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - jwt: []
+      summary: get-subscribers newsletter
+      tags:
+      - newsletter
+  /api/v1/user/user:
+    delete:
+      description: Disable a user's account
+      operationId: user#deactivate
+      parameters:
+      - description: whether admin is requesting this deactivation
+        in: query
+        name: admin
+        required: false
+        type: boolean
+      - description: id of the user to be deactivated when admin is deactivating a
+          user
+        in: query
+        name: id
+        required: false
+        type: string
+      produces:
+      - OK
+      - application/vnd.goa.error
+      responses:
+        "200":
+          description: OK
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - jwt: []
+      summary: deactivate user
+      tags:
+      - user
+    get:
+      description: Get user by ID
+      operationId: user#retrieve
+      parameters:
+      - description: The ID of the requested user. If this is not provided, get currently
+          logged in user
+        in: query
+        name: user-id
+        required: false
+        type: string
+      produces:
+      - application/vnd.goa.error
+      - user
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/User'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/error'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/error'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - key: []
+      summary: retrieve user
+      tags:
+      - user
+    patch:
+      description: Update a user
+      operationId: user#update
+      parameters:
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/user-params'
+      produces:
+      - OK
+      - application/vnd.goa.error
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/error'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - jwt: []
+      summary: update user
+      tags:
+      - user
+  /api/v1/user/user/all:
+    get:
+      description: Get all users
+      operationId: user#get-all-users
+      produces:
+      - application/vnd.goa.error
+      - user
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/User'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/error'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/error'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - jwt: []
+      summary: get-all-users user
+      tags:
+      - user
+  /api/v1/user/user/authstat:
+    get:
+      description: Returns whether Oauth is attached or not
+      operationId: user#getAuths
+      parameters:
+      - description: The ID of the requested user. If this is not provide, get currently
+          logged in user
+        in: query
+        name: userID
+        required: false
+        type: string
+      produces:
+      - application/vnd.goa.error
+      - auth-status
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Auth-Status'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/error'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - key: []
+      summary: getAuths user
+      tags:
+      - user
+  /api/v1/user/user/email:
+    get:
+      description: Get a user by their email. Only callable by admins
+      operationId: user#get-by-email
+      parameters:
+      - description: The email of the requested user.
+        format: email
+        in: query
+        name: email
+        required: true
+        type: string
+      produces:
+      - application/vnd.goa.error
+      - user
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/User'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - key: []
+      summary: get-by-email user
+      tags:
+      - user
+  /api/v1/user/user/multi:
+    get:
+      description: Get many users by their ID
+      operationId: user#get-many
+      parameters:
+      - collectionFormat: multi
+        description: Unique unchanging user ID
+        in: query
+        items:
+          type: string
+        name: id
+        required: false
+        type: array
+      produces:
+      - application/vnd.goa.error
+      - user; type=collection
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/UserCollection'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/error'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - key: []
+      summary: get-many user
+      tags:
+      - user
+  /api/v1/user/user/plugins:
+    post:
+      description: Add a new plugin to user's account
+      operationId: user#add-plugin
+      parameters:
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/user-plugin'
+      produces:
+      - application/vnd.goa.error
+      - user
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/User'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - key: []
+      summary: add-plugin user
+      tags:
+      - user
+    put:
+      description: Update plugin permissions
+      operationId: user#update-plugin-permissions
+      parameters:
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/user-plugin'
+      produces:
+      - application/vnd.goa.error
+      - user
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/User'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - key: []
+      summary: update-plugin-permissions user
+      tags:
+      - user
+  /api/v1/user/user/resend-verify:
+    post:
+      description: Resends a verify email for the current user, also invalidates the
+        link on the previously send email verification
+      operationId: user#resend-verify-email
+      produces:
+      - OK
+      - application/vnd.goa.error
+      responses:
+        "200":
+          description: OK
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - key: []
+      summary: resend-verify-email user
+      tags:
+      - user
+  /api/v1/user/user/update-user:
+    patch:
+      description: Update a user from admin dashboard
+      operationId: user#update-admin
+      parameters:
+      - description: user id to be modified
+        in: query
+        name: uid
+        required: false
+        type: string
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/user-params-admin'
+      produces:
+      - OK
+      - application/vnd.goa.error
+      responses:
+        "200":
+          description: OK
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/error'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - jwt: []
+      summary: update-admin user
+      tags:
+      - user
+  /verifyemail/{validateID}:
+    get:
+      description: Validates an email address, designed to be called by users directly
+        in their browser
+      operationId: user#validate-email
+      parameters:
+      - description: The ID of the validation to be confirmed
+        in: path
+        name: validateID
+        required: true
+        type: string
+      produces:
+      - application/vnd.goa.error
+      - text/html
+      responses:
+        "303":
+          description: See Other
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/error'
+      schemes:
+      - http
+      security:
+      - key: []
+      summary: validate-email user
+      tags:
+      - user
+produces:
+- application/json
+- application/xml
+- application/gob
+- application/x-gob
+responses:
+  OK:
+    description: OK
+    schema:
+      $ref: '#/definitions/Bookmark'
+  SeeOther:
+    description: See Other
+schemes:
+- http
+securityDefinitions:
+  jwt:
+    description: |2-
+
+
+      **Token URL**: http://localhost:3000/api/auth/login
+    in: header
+    name: Authorization
+    type: apiKey
+  key:
+    description: API Key for users API
+    in: header
+    name: API-Key
+    type: apiKey
+swagger: "2.0"
